@@ -299,19 +299,18 @@ const solveSudoku = (board) => {
 
 
 //463. 岛屿的周长
-test merge
-// input=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+input=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
 
-// var islandPerimeter = function(grid) {
-//     let ans=0
-//     const dx=[0,1,0,-1];
-//     const dy=[1,0,-1,0];
-//     const m=grid.length - 1,n=grid[0].length -1; 
-//     for (var i = 0; i < n; i++) {
-//         for (var j= 0; i < n; j++) {
-//             if(grid[i][j]){
+var islandPerimeter = function(grid) {
+    let ans=0
+    const dx=[0,1,0,-1];
+    const dy=[1,0,-1,0];
+    const m=grid.length - 1,n=grid[0].length -1; 
+    for (var i = 0; i < n; i++) {
+        for (var j= 0; i < n; j++) {
+            if(grid[i][j]){
 
-//             }
-//         }
-//     }
-// };
+            }
+        }
+    }
+};
