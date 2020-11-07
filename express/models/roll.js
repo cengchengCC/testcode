@@ -1,4 +1,4 @@
-const roll = function (sequelize, DataTypes) {
+module.exports= function (sequelize, DataTypes) {
     const Model = sequelize.define('roll', {
 		upid:{
 			type: DataTypes.TEXT('long'),
@@ -60,5 +60,3 @@ const roll = function (sequelize, DataTypes) {
     return Model
 }
 
-
-module.exports = roll
