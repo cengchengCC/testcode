@@ -3,6 +3,8 @@
 
 const express = require('express')
 const { Sequelize, DataTypes,Model  } = require('sequelize');
+const app = express()
+const port = 2000
 
 const sequelize=new Sequelize('BSdataTest','postgres','616616',{
 	host:'219.216.80.18',
@@ -17,11 +19,18 @@ sequelize.authenticate()
         console.error('Unable to connect to the database:', err);
     });
 
-const app = express()
-const port = 2000
-app.get('/', (req, res) => res.send('Hello World!'))
+
+
+app.use('/', function(req, res){
+    res.write('You maybe access /v1/api');
+    res.end();
+});
+app.use('/api/test',require('./routes/test'))
+// const roll = require('./models/roll')
+// const date={roll:true}
+// app.get('/temp', (req, res) => res.send(date.roll))
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
 
-const roll = require('./models/roll')
-console.log(roll)
+
+
 exports.sequelize = sequelize
