@@ -12,3 +12,34 @@ var removeVowels = function(S) {
 var removeVowels = function(S) {
     return S.replace(/[aeiou]/g, '')
 };
+//
+var string="aabcccccaaa"
+/**
+ * @param {string} S
+ * @return {string}
+ */
+var compressString = function(S) {
+    if(S.length===0)return S;
+    let result='';
+    let temp='',count=1
+    for (let i of S){
+        console.log(temp)
+        if(temp===''){
+            temp=i
+        }else{
+            if(temp===i){
+                count++
+            }else{
+                result+=temp+count
+                
+                temp=i
+                count=1
+            }
+        }
+    }
+    if(S.length<result.length){
+        return S
+    }
+    return result
+};
+console.log(compressString(string))
