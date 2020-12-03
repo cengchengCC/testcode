@@ -361,3 +361,49 @@ console.log(islandPerimeter([[1,0]]))
 //     return ans % 1000000007;
 // };
 
+// var lengthLongestPath = function(input) {
+
+//     let res=[];
+//     const arr=res.split('\n');
+//     const stack=[];
+//     for (let str of arr){
+//         let chars=str.split('\t');
+//         if(!stack.length){
+//             stack.push([chars[chars.length-1],chars.length])
+//         }else{
+//             let depth=stack[stack.length-1][1]
+//             if(chars.length<=depth){
+//                 for(let i =chars.length;i<=length;i++){
+//                     stack.pop()
+//                 }
+//                 stack.push([chars[chars.length-1]])
+//             }
+//         }
+//     }
+// };
+
+
+
+// 925. 长按键入  Two Pointers
+
+var isLongPressedName=function(name,typed){
+	// if(name.legth&)
+	i=0;
+	for(j=0;j<typed.length;j++){
+		if(typed[j]===name[i]){
+			j++
+			i++
+		}else if(typed[j]===name[i-1]){
+			j++
+		}
+	}
+	if(i===name.length){
+		return true
+	}else{
+		return false
+	}
+}
+
+
+typed="leelee"
+console.log(typed.length)
