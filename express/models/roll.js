@@ -19,33 +19,33 @@ module.exports= function (sequelize, DataTypes) {
 		toc:{
 			type: DataTypes.DATE
 		},
-		// all_processes_statistics:{
-		// 	type: DataTypes.JSON
-		// },
+		all_processes_statistics:{
+			type: DataTypes.JSON
+		},
 		all_processes_statistics_ismissing:{
 			type: DataTypes.INTEGER
 		},
-		// v1:{
-		// 	type: DataTypes.JSON
-		// },
+		v1:{
+			type: DataTypes.JSON
+		},
 		cool_ismissing:{
 			type: DataTypes.INTEGER
 		},
-		// v2:{
-		// 	type: DataTypes.JSON
-		// },
+		v2:{
+			type: DataTypes.JSON
+		},
 		fu_temperature_ismissing:{
 			type: DataTypes.INTEGER
 		},
-		// v3:{
-		// 	type: DataTypes.JSON
-		// },
+		v3:{
+			type: DataTypes.JSON
+		},
 		m_ismissing:{
 			type: DataTypes.INTEGER
 		},
-		// fqc_label:{
-		// 	type: DataTypes.JSON
-		// },
+		fqc_label:{
+			type: DataTypes.JSON
+		},
 		fqc_ismissing:{
 			type: DataTypes.INTEGER
 		}
