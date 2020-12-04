@@ -4,6 +4,10 @@ https://www.javascriptcn.com/read-66963.html
 
 [sequelize-auto Github](https://github.com/sequelize/sequelize-auto)
 
+```cmd
+cnpm install -g nodemon
+```
+
 -h 数据库的IP地址 
 -d 数据库名 
 -u 用户名 

@@ -2,7 +2,7 @@
 
 const express = require('express')
 const app = express()
-const port = 2000
+const port = 4000
 
 
 
@@ -14,6 +14,6 @@ const port = 2000
 // });
 app.use('/api/v1/roll', require('./routes/roll'))
 
-// const date={roll:true}
-// app.get('/temp', (req, res) => res.send(date.roll))
+app.use('/api',require('./api/index.js'))
+// app.get('/temp', (req, res) => res.send({roll:true}))
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
