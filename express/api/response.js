@@ -75,3 +75,5 @@ router.get('/status',(req,res)=>{
     res.status(404).sendFile('/absolute/path/to/404.png')
 })
 //Sets the HTTP status for the response. It is a chainable alias of Node’s response.statusCode.
+
+module.exports = router
