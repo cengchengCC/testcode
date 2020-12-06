@@ -3,6 +3,9 @@ https://itbilu.com/nodejs/npm/41mRdls_Z.html
 https://www.javascriptcn.com/read-66963.html
 
 [sequelize-auto Github](https://github.com/sequelize/sequelize-auto)
+[swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
+[swagger学习之路](https://blog.csdn.net/qq_21816375/article/details/73887532)
+[express+swagger](https://blog.csdn.net/weixin_33858249/article/details/91455264?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control)
 
 ```cmd
 cnpm install -g nodemon
