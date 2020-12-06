@@ -325,7 +325,7 @@ input=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
 // };
 // // 链接：https://leetcode-cn.com/problems/island-perimeter/solution/dao-yu-de-zhou-chang-by-leetcode-solution/
 
-console.log(islandPerimeter([[1,0]]))
+// console.log(islandPerimeter([[1,0]]))
 
 
 //LCP01 早餐组合
@@ -341,7 +341,7 @@ console.log(islandPerimeter([[1,0]]))
 //     let last = drinks.length - 1;
 //     staple.sort(cmp);
 //     drinks.sort(cmp);
-    
+	
 //     for (var food of staple) {
 //         if (food > x) break;
 //         if (food + drinks[last] <= x) ans += (last + 1); 
@@ -356,8 +356,8 @@ console.log(islandPerimeter([[1,0]]))
 //         }
 //         if (last < 0) break;
 //     }
-    
-    
+	
+	
 //     return ans % 1000000007;
 // };
 
@@ -513,53 +513,53 @@ const solveSudoku = (board) => {
   const blocks = new Array(9);  // 存放每一框对应的可选数集
   const options = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; 
   for (let i = 0; i < 9; i++) { // 集合的初始化
-    rows[i] = new Set(options);
-    cols[i] = new Set(options);
-    blocks[i] = new Set(options);
+	rows[i] = new Set(options);
+	cols[i] = new Set(options);
+	blocks[i] = new Set(options);
   }
 
   const getBlockIndex = (i, j) => { // 根据坐标，获取所在的小框的索引
-    return (i / 3 | 0) * 3 + j / 3 | 0;  // |0 是向下取整
+	return (i / 3 | 0) * 3 + j / 3 | 0;  // |0 是向下取整
   };
 
   for (let i = 0; i < 9; i++) {    // 根据现有的已填的数字，更新set们
-    for (let j = 0; j < 9; j++) {
-      if (board[i][j] != ".") {
-        rows[i].delete(board[i][j]); // 当前行出现过这个数字，这个数字就不能在这一行出现，删除该选项
-        cols[j].delete(board[i][j]);
-        blocks[getBlockIndex(i, j)].delete(board[i][j]);
-      }
-    }
+	for (let j = 0; j < 9; j++) {
+	  if (board[i][j] != ".") {
+		rows[i].delete(board[i][j]); // 当前行出现过这个数字，这个数字就不能在这一行出现，删除该选项
+		cols[j].delete(board[i][j]);
+		blocks[getBlockIndex(i, j)].delete(board[i][j]);
+	  }
+	}
   }
 
   const fill = (i, j) => {
-    if (j == 9) {     // 列越界，就填下一行
-      i++;
-      j = 0;
-      if (i == 9) return true;  // 都填完了 返回true
-    }
-    if (board[i][j] != ".") return fill(i, j + 1); // 如果不是空白格，递归填下一格
+	if (j == 9) {     // 列越界，就填下一行
+	  i++;
+	  j = 0;
+	  if (i == 9) return true;  // 都填完了 返回true
+	}
+	if (board[i][j] != ".") return fill(i, j + 1); // 如果不是空白格，递归填下一格
 
-    const blockIndex = getBlockIndex(i, j); // 获取所在小框的索引
+	const blockIndex = getBlockIndex(i, j); // 获取所在小框的索引
 
-    for (let num = 1; num <= 9; num++) {    // 枚举出所有选择：1-9
-      const s = String(num);
-      // 当前选择必须在三个set中都存在，如果有一个不存在，就说明发生了冲突，跳过该选择
-      if (!rows[i].has(s) || !cols[j].has(s) || !blocks[blockIndex].has(s)) continue;
+	for (let num = 1; num <= 9; num++) {    // 枚举出所有选择：1-9
+	  const s = String(num);
+	  // 当前选择必须在三个set中都存在，如果有一个不存在，就说明发生了冲突，跳过该选择
+	  if (!rows[i].has(s) || !cols[j].has(s) || !blocks[blockIndex].has(s)) continue;
 
-      board[i][j] = s;    // 作出选择
-      rows[i].delete(s);  // 更新set们，删掉这个可填选项
-      cols[j].delete(s);
-      blocks[blockIndex].delete(s);
+	  board[i][j] = s;    // 作出选择
+	  rows[i].delete(s);  // 更新set们，删掉这个可填选项
+	  cols[j].delete(s);
+	  blocks[blockIndex].delete(s);
 
-      if (fill(i, j + 1)) return true; // 如果基于当前选择，填下一个，最后可解出数独，直接返回真
-      // 基于当前选择，填下一个，怎么填都不行，回溯，恢复为空白格
-      board[i][j] = ".";
-      rows[i].add(s);     // set们，将之前删掉的当前数字，加回来
-      cols[j].add(s);
-      blocks[blockIndex].add(s);
-    }
-    return false;  // 尝试了1-9，每个都往下递归，都不能做完，返回false
+	  if (fill(i, j + 1)) return true; // 如果基于当前选择，填下一个，最后可解出数独，直接返回真
+	  // 基于当前选择，填下一个，怎么填都不行，回溯，恢复为空白格
+	  board[i][j] = ".";
+	  rows[i].add(s);     // set们，将之前删掉的当前数字，加回来
+	  cols[j].add(s);
+	  blocks[blockIndex].add(s);
+	}
+	return false;  // 尝试了1-9，每个都往下递归，都不能做完，返回false
   };
 
   fill(0, 0);  // 填格子的起点
@@ -708,18 +708,47 @@ const solveSudoku = (board) => {
 
 
 //463. 岛屿的周长
-input=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
+// input=[[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]
 
-var islandPerimeter = function(grid) {
-    let ans=0
-    const dx=[0,1,0,-1];
-    const dy=[1,0,-1,0];
-    const m=grid.length - 1,n=grid[0].length -1; 
-    for (var i = 0; i < n; i++) {
-        for (var j= 0; i < n; j++) {
-            if(grid[i][j]){
+// var islandPerimeter = function(grid) {
+//     let ans=0
+//     const dx=[0,1,0,-1];
+//     const dy=[1,0,-1,0];
+//     const m=grid.length - 1,n=grid[0].length -1; 
+//     for (var i = 0; i < n; i++) {
+//         for (var j= 0; i < n; j++) {
+//             if(grid[i][j]){
 
-            }
-        }
-    }
-};
+//             }
+//         }
+//     }
+// };
+
+//118. 杨辉三角
+// var generate=function(numRows){
+// 	const ret=[]
+// 	for (let i=0;i<numRows;i++){
+// 		const row=new Array(i+1).fill(1);
+// 		for(let j=1;j<row.length-1;j++){
+// 			row[j]=ret[i-1][j-1]+ret[i-1][j]
+// 		}
+// 		ret.push(row)
+// 	}
+// 	return ret
+// }
+
+// var generate=(numRows)=>{
+// 	if(numRows===0)return []
+// 	if(numRows===1)return [[1]]
+// 	ret=generate(numRows-1)
+// 	let length=ret.length
+// 	row=new Array(length+1).fill(1)
+// 	for (let i=1;i<length;i++){
+// 		row[i]=ret[length-1][i-1]+ret[length-1][i]
+// 	}
+// 	ret.push(row)
+// 	return ret
+// }
+// console.log(generate(5))
+// 119. 杨辉三角 II
+
