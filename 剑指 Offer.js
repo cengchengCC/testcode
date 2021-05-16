@@ -26,5 +26,21 @@
 //     return arr
 // };
 
-DFS
-https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/solution/yan-du-you-xian-sou-suo-by-shetia-2/
+//  DFS
+//  https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/solution/yan-du-you-xian-sou-suo-by-shetia-2/
+
+// 剑指 Offer 57. 和为s的两个数字
+var twoSum = function(nums, target) {
+    let i = 0, j = nums.length - 1;
+    while(i !== j){
+        let sum = nums[i] + nums[j]
+        if(sum > target){
+            j--
+        }else if(sum < target){
+            i++
+        }else{
+            return [nums[i], nums[j]]
+        }
+    }
+    return []
+};
