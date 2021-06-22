@@ -153,7 +153,71 @@ function Person(name, age, job){
 }
 var person1 = new Person("Nicholas", 29, "Software Engineer");
 var person2 = new Person("Greg", 27, "Doctor");
-console.log(person1 instanceof Person)  // true
-console.log(person2 instanceof Person)  // true
-console.log(person1 instanceof Object); //true
-console.log(person1 instanceof Function)
+// console.log(person1 instanceof Person)  // true
+// console.log(person2 instanceof Person)  // true
+// console.log(person1 instanceof Object); //true
+// console.log(person1 instanceof Function)  //false
+
+// const isObject = target => 
+//   (typeof target == "object" || typeof target == "function") && (target !== null);
+// function deepClone(target, map = new WeakMap()){
+//   if(map.get(target)){
+//     return target;
+//   }
+
+//   let constructor = target.constructor;
+
+//   if(/^(RegExp|Date)$/i.test(constructor.name)){
+//     return new constructor(target); 
+//   }
+
+//   if(isObject(target)){
+//     map.set(target, true);
+//     const cloneTarget = Array.isArray(target) ? [] : {};
+//     for(let prop in target){
+//       if(target.hasOwnProperty(prop)){
+//         cloneTarget[prop] = deepClone(target[prop], map);
+//       }
+//     }
+//   }
+// }
+
+
+function deepClone(obj,hash = new WeakMap()){
+    if(obj instanceof RegExp) return new RegExp(obj);
+    if(obj instanceof Date) return new Date(obj);
+    if(obj === null || typeof obj !== 'object') return obj;
+    //循环引用的情况
+    if(hash.has(obj)){
+        return hash.get(obj)
+    }
+    //new 一个相应的对象
+    //obj为Array，相当于new Array()
+    //obj为Object，相当于new Object()
+    let constr = new obj.constructor();
+    hash.set(obj,constr);
+    for(let key in obj){
+        if(obj.hasOwnProperty(key)){
+            constr[key] = deepClone(obj[key],hash)
+        }
+    }
+    //考虑symbol的情况
+    let symbolObj = Object.getOwnPropertySymbols(obj)
+    for(let i=0;i<symbolObj.length;i++){
+        if(obj.hasOwnProperty(symbolObj[i])){
+            constr[symbolObj[i]] = deepClone(obj[symbolObj[i]],hash)
+        }
+    }
+    return constr
+}
+
+var arr = [1, [7, [9]], {a:'1'}, function(){}, null, undefined, NaN, new Date(), /i/g, Symbol("symbol")];
+// console.log(deepClone(arr))
+function newtype(obj){
+    let res = Object.prototype.toString.call(obj).split(" ")[1]
+    res =res.substring(0, res.length-1).toLowerCase()
+    return res
+} 
+// for (let item of arr){
+//     console.log(newtype(item))
+// }

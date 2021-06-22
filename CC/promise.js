@@ -1,10 +1,10 @@
-class Promise{
-    constructor(executor){
-        const resolve = () => {},
-            reject = () => {};
-        executor(resolve, reject)
-    }
-}
+// class Promise{
+//     constructor(executor){
+//         const resolve = () => {},
+//             reject = () => {};
+//         executor(resolve, reject)
+//     }
+// }
 
 //new Promise(executor)， executor 两个参数，resolve，reject
 //Promise 内部有三个状态，pending、fulfilled、rejected，
@@ -14,6 +14,28 @@ class Promise{
 // Promise 内部状态
 const STATUS = { PENDING: 'PENDING', FUFILLED: 'FUFILLED', REJECTED: 'REJECTED' }
 
+function resolvePromise(x, promise2, resolve, reject){
+    if(promise2 === x){
+        return reject(new TypeError("quote self"))
+    }
+
+    if((typeof x === "object" && x !==null) || typeof x === "function"){
+        let called;
+        try{
+
+            let then = x.then;
+            if(typeof then == "function"){
+
+                then.call(x, function(y){
+
+                })
+            }
+        }catch(e){
+            
+        }
+    }
+}
+
 class Promise{
     constructor(executor){
         this.status = STATUS.PENDING;
@@ -22,19 +44,24 @@ class Promise{
         this.onResolvedCallbacks = [];
         this.onRejectedCallbacks = [];
         const resolve = (val) => {
+            if(val instanceof Promise){
+                return val.then(resolve, reject)
+            }
+
             if(this.status == STATUS.PENDING){
-                this.ststus = STATUS.FUFILLED;
+                this.status = STATUS.FUFILLED;
                 this.value = val;
-                this.onResolvedCallbacks.forEach(fn => fn);
+                this.onResolvedCallbacks.forEach(fn => fn());
             }
         };
         const reject = (reason) => {
             if(this.status == STATUS.PENDING){
                 this.status = STATUS.REJECTED;
                 this.reason = reason;
-                this.onRejectedCallbacks.forEach(fn =>fn())
+                this.onRejectedCallbacks.forEach(fn =>fn());
             }
         };
+        // console.log("*********")
         try{
             executor(resolve, reject)
         }catch(e){
@@ -42,58 +69,70 @@ class Promise{
         }
     }
     then(onFulfilled, onRejected){
-        if(this.status == STATUS.FUFILLED){
-            onFulfilled(this.value)
-        }
-        if(this.status == STATUS.REJECTED){ 
-            onRejected(this.reason)
-        }
-        if(this.status === STATUS.PENDING){
-            this.onResolvedCallbacks.push(() => {
-                onFulfilled(this.value)
-            })
-            this.onRejectedCallbacks.push(() => {
-                onRejected(this.reason)
-            })
-        }
         let promise2 = new Promise((resolve, reject) =>{
-            if(this.status === STATUS.FUFILED){
+            if(this.status === STATUS.FUFILLED){
                 try{
                     let x = onFulfilled(this.value);
                     resolve(x);
                 }catch(e){
-                    reject(e)
+                    reject(e);
                 }
             }
             if(this.status === STATUS.REJECTED){
                 try{
                     let x = onRejected(this.reason);
-                    resolve(x);
+                    resolve(x)
                 }catch(e){
-                    reject(e);
+                    reject(e)
                 }
             }
             if(this.status === STATUS.PENDING){
                 this.onResolvedCallbacks.push(() => {
                     try{
                         let x = onFulfilled(this.value);
-                        resolve(x)
+                        resolve(x);
                     }catch(e){
-                        reject(e)
+                        reject(e);
                     }
                 })
                 this.onRejectedCallbacks.push(() => {
-                    try {
+                    try{
                         let x = onRejected(this.reason);
                         resolve(x)
                     }catch(e){
-                        reject(e)
+                        reject(e);
                     }
                 })
             }
         })
         return promise2
     }
+    catch(onRejected){
+        return this.then(null, onRejected)
+    }
 }
 
-//https://www.jianshu.com/p/818bfe22eefd
+const p = new Promise((resolve, reject) => {
+    // resolve(20)
+    setTimeout(() => resolve(20), 1000)
+})
+p.then(data => {
+    console.log(data)
+    return data;
+})
+.then(a => console.log("a: " + a))
+.then(d => {
+    throw new Error("error :CC")
+})
+.catch(e => console.log("Error:" + e))
+
+Promise.deferred = function () {
+    let dfd = {};
+    dfd.promise = new Promise((resolve,reject)=>{
+        dfd.resolve = resolve;
+        dfd.reject = reject
+    })
+    return dfd;
+}
+
+module.exports = Promise
