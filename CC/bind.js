@@ -29,3 +29,4 @@ Function.prototype.myBind = function(context, ...args){
 
 const newboundGetX = unboundGetX.myBind(obj, 3);
 console.log(newboundGetX());
+console.log(unboundGetX.myBind(obj)(3))

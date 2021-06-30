@@ -1,39 +1,4 @@
-// 102. 二叉树的层序遍历
 
-var levelOrder = function(root) {
-    let queue=[];
-    let result=[]
-    if(!root)return result;
-    queue.push(root);
-    while(queue.length){
-        let length=queue.length;
-        let array=[];
-        while(length--){
-            let node=queue.shift();
-            node.left&&queue.push(node.left)
-            node.right&&queue.push(node.right)
-            array.push(node.val)
-        }
-        result.push(array)
-    }
-    return result
-};
-
-// var levelOrder = function(root) {
-//     let res=[]
-//     if(!root)return [];
-//     traversal(root,0)
-//     function traversal(node,depth){
-//         if(!node)return []
-//         if(!res[depth]){
-//             res[depth]=[]
-//         }
-//         res[depth].push(node.val);
-//         traversal(node.left,depth+1);
-//         traversal(node.right,depth+1);
-//     }
-//     return res
-// };
 // 559. N叉树的最大深度
 var maxDepth = function(root) {
     if(!root) return 0;
