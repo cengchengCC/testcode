@@ -1,0 +1,1 @@
+let sym2 = Symbol("key");
