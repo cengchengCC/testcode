@@ -100,51 +100,7 @@ function merge(left, right){
     return result
 }
 
-console.log(mergeSort(list))
-
-function quickSort(array, left, right){
-    var left = typeof left !== "number" ? 0 :left,
-        right = typeof right !== "number" ? array.length - 1 : right
-
-    if(left == right){
-        return
-    }
-
-    if(left + 1 === right){
-        if(array[left] <= array[right]){
-            return
-        }else{
-            [array[left], array[right]] = [array[right], array[left]]
-            return
-        }
-    }
-
-    let pivot = median3(array, left, right),
-        i = left + 1,
-        j = right -2;
-
-    while(i < j){
-        while(array[i] < pivot){
-            i++
-        }
-        while(pivot < array[j]){
-            j--
-        }
-        if(i < j){
-            if(array[i] === array[j]){
-                i++
-            }else{
-                [array[i], array[j]] = [array[j], array[i]]
-            }
-        }else{
-            break
-        }
-    }
-
-    [array[i], array[right - 1]] = [array[right - 1], array[i]]
-    quickSort(array, left, i -1)
-    quickSort(array, left, i -1)
-}
+// console.log(mergeSort(list))
 
 function heapSort(array){
     let heap = buildMap(array);
@@ -155,3 +111,67 @@ function heapSort(array){
         percolateDown(heap, 1);
     }
 }
+
+let sortList = [84, 83, 88, 87, 61, 50, 70, 60, 80]
+
+function quickSort2(array, left, right){
+    var left = typeof left !== 'number' ? 0 : left,
+        right = typeof right !== 'number' ? array.length - 1 : right;
+    
+    if(left == right)return
+    else if(left + 1 === right){
+        if(array[left] == array[right])return
+        else {
+            [array[left], array[right]] = [array[right], array[left]];
+            return
+        }
+    }
+
+    let pivot =  median3(array, left, right),
+        i = left + 1,
+        j = right - 2;
+
+    while(i < j){
+        while(array[i] < pivot)i++;
+        while(array[j] > pivot)j--;
+
+        if(i < j){
+            if(array[i] === array[j]){
+                i++
+            }else{
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }else{
+            break
+        }
+    }
+
+    [array[i], array[right - 1]] = [array[right - 1], array[i]];
+
+    quickSort2(array, left, i - 1);
+    quickSort2(array, i + 1, right)
+}
+
+function median3(array, left, right){
+    let center = Math.floor((left + right) / 2);
+
+    if(array[center] < array[left]){
+        [array[left], array[center]] = [array[center], array[left]];
+    }
+
+    if(array[right] < array[left]){
+        [array[left], array[right]] = [array[right], array[left]];
+    }
+
+    if(array[right] < array[center]){
+        [array[center], array[right]] = [array[right], array[center]];
+    }
+
+    [array[center], array[right - 1]] = [array[right - 1], array[center]];
+
+    return array[center]
+}
+
+// console.log(sortList)
+// quickSort2(sortList)
+// console.log(sortList)
