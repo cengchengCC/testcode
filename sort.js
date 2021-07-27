@@ -102,16 +102,6 @@ function merge(left, right){
 
 // console.log(mergeSort(list))
 
-function heapSort(array){
-    let heap = buildMap(array);
-    
-    for(let i = heap.size; i > 1; i --){
-        [heap[i], heap[1]] = [heap[1], heap[i]];
-        heap.size--;
-        percolateDown(heap, 1);
-    }
-}
-
 let sortList = [84, 83, 88, 87, 61, 50, 70, 60, 80]
 
 function quickSort2(array, left, right){
@@ -175,3 +165,23 @@ function median3(array, left, right){
 // console.log(sortList)
 // quickSort2(sortList)
 // console.log(sortList)
+
+function heapSort(array){
+    let heap = buildMap(array);
+    
+    for(let i = heap.size; i > 1; i --){
+        [heap[i], heap[1]] = [heap[1], heap[i]];
+        heap.size--;
+        percolateDown(heap, 1);
+    }
+}
+
+function buildHeap(array){
+	let heap = [];
+	heap.size = array.length;
+	for(let i = 0;i < array.length; i++){
+		heap[i + 1] = array[i];
+	}
+
+	let currentIndex = Math.floor()
+}
