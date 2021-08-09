@@ -6,6 +6,8 @@ const obj = {
     }
 };
 
+var getY = obj.getX;
+console.log(getY(1))
 const unboundGetX = obj.getX;
 console.log(unboundGetX(1)); // The function gets invoked at the global scope
 // expected output: undefined
