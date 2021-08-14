@@ -167,13 +167,14 @@ function median3(array, left, right){
 // console.log(sortList)
 
 function heapSort(array){
-    let heap = buildMap(array);
+    let heap = buildHeap(array);
     
     for(let i = heap.size; i > 1; i --){
         [heap[i], heap[1]] = [heap[1], heap[i]];
         heap.size--;
         percolateDown(heap, 1);
     }
+    return heap.slice(1)
 }
 
 function buildHeap(array){
@@ -183,5 +184,46 @@ function buildHeap(array){
 		heap[i + 1] = array[i];
 	}
 
-	let currentIndex = Math.floor()
+	let currentIndex = Math.floor(heap.size/2);
+    while(currentIndex > 0){
+        percolateDown(heap, currentIndex);
+        currentIndex--;
+    }
+    return heap;
+}
+
+function percolateDown (heap, currentIndex) {
+    let leftSonIndex = 2 * currentIndex,
+        rightSonIndex = 2 * currentIndex + 1,
+        maxValueIndex = currentIndex;
+    
+
+    if (leftSonIndex <= heap.size && heap[leftSonIndex] > heap[currentIndex]) {
+        maxValueIndex = leftSonIndex;
+    }
+
+    if (rightSonIndex <= heap.size && heap[rightSonIndex] > heap[maxValueIndex]) {
+        maxValueIndex = rightSonIndex;
+    }
+
+    if (currentIndex !== maxValueIndex) {
+        [heap[currentIndex], heap[maxValueIndex]] = [heap[maxValueIndex], heap[currentIndex]];
+        percolateDown(heap, maxValueIndex);
+    }
+}
+
+// console.log(heapSort(list))
+
+let countList = [2, 5, 3, 0, 2, 3, 0, 3];
+
+function countingSort(array){
+    let temp = [];
+
+    array.forEach(d => {
+        if(typeof temp[d] == 'number'){
+            temp[d] = temp[d] + 1;
+        }else{
+            temp[d] = 1;
+        }
+    })
 }
