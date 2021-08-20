@@ -21,6 +21,19 @@ var buildTree = function(preorder, inorder) {
 
 //https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/solution/jian-zhi-offer-07-zhong-jian-er-cha-shu-qx9pj/
 var buildTree = function(preorder, inorder) {
+    const helper = (p_start, p_end, i_start, i_end) =>{
+        if(p_start > p_end)return null;
+        let root = new TreeNode(preorder[p_start]);
+        let mid = inorder.indexOf(preorder[p_start], i_start);
+        let leftNum = mid - i_start;
+        root.left = helper(p_start + 1, p_start + leftNum, i_start, mid - 1);
+        root.right = helper(p_start + leftNum + 1, p_end, mid + 1, i_end);
+        return root;
+    }
+    return helper(0, preorder.length - 1, 0, inorder.length - 1);
+};
+
+var buildTree = function(preorder, inorder) {
     if(preorder.length==0) return null;
     let n = preorder.length;
 

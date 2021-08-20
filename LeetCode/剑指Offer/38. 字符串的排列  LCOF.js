@@ -14,6 +14,8 @@ var permutation = function(s){
 	dfs("")
 	return [... res]
 }
+//O(n×n!)
+// O(n)
 //https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/javascript-hui-su-fa-by-menteceso/
 
 var permutation = function(s){

@@ -23,6 +23,7 @@ Function.prototype.myBind = function(context, ...args){
 
     return function newFn(...newFnArgs){
         if(this instanceof newFn){
+            console.log(this)
             return new fn(...args, ...newFnArgs)
         }
         return fn.apply(context, [...args, ...newFnArgs])
@@ -31,4 +32,5 @@ Function.prototype.myBind = function(context, ...args){
 
 const newboundGetX = unboundGetX.myBind(obj, 3);
 console.log(newboundGetX());
-console.log(unboundGetX.myBind(obj)(3))
+console.log(new newboundGetX());
+console.log(unboundGetX.myBind(obj)(4))

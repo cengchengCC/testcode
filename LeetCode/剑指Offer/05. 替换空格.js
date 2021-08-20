@@ -23,4 +23,12 @@ var replaceSpace = function(s) {
     return s.join('')
 };
 
+var replaceSpace = function(s) {
+    s = s.split('');
+    for(let i =0; i < s.length;i ++){
+        if(s[i] == ' ')s[i] = '%20';
+    }
+    return s.join('')
+};
+
 `https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/solution/tu-jie-guan-fang-tui-jian-ti-jie-ti-huan-3l74/`
